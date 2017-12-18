@@ -4,14 +4,11 @@ class Solution {
             return true;
         else {
             Stack<List> stack = new Stack<List>();
-            Set<List> set = new HashSet<>();
+            TreeMap<Integer, Character> map = new TreeMap<>();
 
             for(int i=0; i<s.length(); i++) {
                 if(s.charAt(i) == '*') {
-                    List tempList = new ArrayList<>();
-                    tempList.add('*');
-                    tempList.add(i);
-                    set.add(tempList);
+                    map.put(i, '*');
                 }
                 else if(s.charAt(i) == '(') {
                     List tempList = new ArrayList<>();
@@ -21,23 +18,11 @@ class Solution {
                 }
                 else {
                     if(stack.isEmpty()) {
-                        int k;
-                        for(k=i-1; k>=0; k--) {
-                            if(s.charAt(k) == '*') {
-                                List tempList = new ArrayList<>();
-                                tempList.add('*');
-                                tempList.add(k);
-                                if(set.size() == 0 || !set.contains(tempList)) {
-                                    return false;
-                                }
-                                else {
-                                    set.remove(tempList);
-                                    break;
-                                }
-                            }
-                        }
-                        if(k < 0) {
+                        if(map.isEmpty()) {
                             return false;
+                        }
+                        else {
+                            map.pollLastEntry();
                         }
                     }
                     else {
@@ -49,23 +34,14 @@ class Solution {
                 int k;
                 List poppedItem = stack.pop();
                 int i=(int)poppedItem.get(1);
-                for(k=i+1; k<s.length(); k++) {
-                    if(s.charAt(k) == '*') {
-                        List tempList = new ArrayList<>();
-                        tempList.add('*');
-                        tempList.add(k);
-                        if(set.size() == 0) {
-                            return false;
-                        }
-                        else if(set.contains(tempList)) {
-                            set.remove(tempList);
-                            break;
-                        }
-                    }
-                }
-                if(k == s.length()) {
+                if(map.isEmpty()) {
                     return false;
-
+                }
+                else {
+                    Map.Entry<Integer, Character> entry = map.pollLastEntry();
+                    if(entry.getKey() < i) {
+                        return false;
+                    }
                 }
             }
             return true;
