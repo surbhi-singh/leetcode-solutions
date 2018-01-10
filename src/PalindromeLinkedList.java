@@ -1,4 +1,3 @@
-import java.math.BigInteger;
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -13,7 +12,6 @@ class Solution {
             return true;
         }
         else {
-            StringBuilder halflist = new StringBuilder("");
             ListNode ptr = head;
             int length=0, counter=0;
             while(ptr != null) {
@@ -22,16 +20,23 @@ class Solution {
             }
             ptr = head;
             while(counter < length/2) {
-                halflist.append(ptr.val+" ");
                 ptr = ptr.next;
                 counter++;
             }
+            ListNode end = ptr;
             if(length % 2 != 0) ptr = ptr.next;
-            String[] vallist = new String[counter];
-            vallist = halflist.toString().split(" ");
-            while(ptr != null) {
-                if(!vallist[--counter].equals(ptr.val+"")) return false;
-                ptr = ptr.next;
+            ListNode prev = ptr, fast = ptr.next;
+            while(fast != null) {
+                prev = fast;
+                fast = fast.next;
+                prev.next = ptr;
+                ptr = prev;
+            }
+            fast = head;
+            while(fast != end) {
+                if(prev.val != fast.val) return false;
+                fast = fast.next;
+                prev = prev.next;
             }
             return true;
         }
