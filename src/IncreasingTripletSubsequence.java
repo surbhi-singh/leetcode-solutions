@@ -20,9 +20,6 @@ class Solution {
                         if(nums[i+1] > nums[leftmin]) {
                             rightmin = i+1;
                         }
-                        else {
-                            leftmin = i+1;
-                        }
                     }
                 }
                 if(count == 2) return true;
