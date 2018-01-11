@@ -5,7 +5,7 @@ class Solution {
             int leftmin = Integer.MAX_VALUE, rightmin = Integer.MAX_VALUE;
             for(int i=0, count=0; i<nums.length-1; i++) {
                 if(nums[i] < nums[i+1]) {
-                    if(rightmin == Integer.MAX_VALUE || nums[i+1] > nums[rightmin] || i == rightmin) {
+                    if(rightmin == Integer.MAX_VALUE || nums[i+1] > nums[rightmin]) {
                         count++;
                     }
                     if(leftmin == Integer.MAX_VALUE || nums[i] < nums[leftmin]) {
