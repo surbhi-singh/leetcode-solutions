@@ -33,8 +33,7 @@ class TicTacToe {
             if(row == col) diagonals[0]--;
             if(row+col == n-1) diagonals[1]--;
         }
-        if(rows[row] == n || cols[col] == n || diagonals[0] == n || diagonals[1] == n) return 1;
-        else if(rows[row] == -n || cols[col] == -n || diagonals[0] == -n || diagonals[1] == -n) return 2;
+        if(Math.abs(rows[row]) == n || Math.abs(cols[col]) == n || Math.abs(diagonals[0]) == n || Math.abs(diagonals[1]) == n) return player;
         else return 0;
     }
 }
