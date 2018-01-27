@@ -33,19 +33,9 @@ class TicTacToe {
             if(row == col) diagonals[0]--;
             if(row+col == n-1) diagonals[1]--;
         }
-        for(int i=0; i<n; i++) {
-            if(rows[i] == n) return 1;
-            else if(rows[i] == -n) return 2;
-        }
-        for(int i=0; i<n; i++) {
-            if(cols[i] == n) return 1;
-            else if(cols[i] == -n) return 2;
-        }
-        for(int i=0; i<2; i++) {
-            if(diagonals[i] == n) return 1;
-            else if(diagonals[i] == -n) return 2;
-        }
-        return 0;
+        if(rows[row] == n || cols[col] == n || diagonals[0] == n || diagonals[1] == n) return 1;
+        else if(rows[row] == -n || cols[col] == -n || diagonals[0] == -n || diagonals[1] == -n) return 2;
+        else return 0;
     }
 }
 
